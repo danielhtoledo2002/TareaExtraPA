@@ -1,0 +1,3 @@
+C:/Users/Danie/OneDrive/Escritorio/Repositorio Proyecto1/TareaExtraPA/cmake-build-debug/CMakeFiles/TareaExtraPA.dir
+C:/Users/Danie/OneDrive/Escritorio/Repositorio Proyecto1/TareaExtraPA/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Danie/OneDrive/Escritorio/Repositorio Proyecto1/TareaExtraPA/cmake-build-debug/CMakeFiles/rebuild_cache.dir
