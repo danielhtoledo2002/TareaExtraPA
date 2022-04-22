@@ -33,23 +33,23 @@ void menu();
 int main() {
     fstream f;
     vector<Productos> productos;
-    int opcion = 0, lazy;
+    int option = 0, lazy;
     do {
         guardarTodo(productos);
         menu();
-        cout << "Ingrese la opcion: ";
-        cin >> opcion;
+        cout << "Ingrese la option: ";
+        cin >> option;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         imprimirTodos(productos);
-        switch (opcion) {
+        switch (option) {
             case 1: {
-                int lenn;
+                int num;
                 cout << "Ingrese la cantidad de Productos a agregar: ";
-                cin >> lenn;
+                cin >> num;
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-                for (int i = 0; i < lenn; i++)
+                for (int i = 0; i < num; i++)
                     agregarDatos(productos);
                 break;
 
@@ -78,7 +78,7 @@ int main() {
 
                 do {
 
-                    cout << "Ingresa la posicion del Productos a devolver: ";
+                    cout << "Ingresa el index (0-" << productos.size()-1 << ") del Productos a devolver: ";
                     cin >> lazy;
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -88,7 +88,7 @@ int main() {
             }
             case 4: {
                 do {
-                    cout << "Ingresa la posicion del Productos a devolver: ";
+                    cout << "Ingresa el index (0-" << productos.size() << ") del Productos a devolver: ";
                     cin >> lazy;
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -103,7 +103,7 @@ int main() {
                 break;
         }
 
-    } while (opcion != 5);
+    } while (option != 5);
 
 }
 
