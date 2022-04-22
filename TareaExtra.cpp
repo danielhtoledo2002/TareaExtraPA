@@ -88,7 +88,7 @@ int main() {
             }
             case 4: {
                 do {
-                    cout << "Ingresa el index (0-" << productos.size() << ") del producto a devolver: ";
+                    cout << "Ingresa el index (0-" << productos.size()-1 << ") del producto a devolver: ";
                     cin >> lazy;
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
