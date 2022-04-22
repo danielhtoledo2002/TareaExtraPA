@@ -14,12 +14,12 @@ using namespace std;
 struct Productos {
 public:
     string productName;
-    int price{};
+    double price{};
     bool stock{true};
 
     void printProducts() const;
 
-    void printProductsFile(ofstream &f) const;
+    void saveProductsToFile(ofstream &f) const;
 };
 
 void guardarTodo(vector<Productos> &arreglo);
@@ -78,7 +78,7 @@ int main() {
 
                 do {
 
-                    cout << "Ingresa el index (0-" << productos.size()-1 << ") del Productos a devolver: ";
+                    cout << "Ingresa el index (0-" << productos.size()-1 << ") del producto a devolver: ";
                     cin >> lazy;
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -88,7 +88,7 @@ int main() {
             }
             case 4: {
                 do {
-                    cout << "Ingresa el index (0-" << productos.size() << ") del Productos a devolver: ";
+                    cout << "Ingresa el index (0-" << productos.size() << ") del producto a devolver: ";
                     cin >> lazy;
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -125,9 +125,11 @@ void guardarTodo(vector<Productos> &arreglo) {
         cout << "Algo salio mal al guardar los datos" << endl;
     }
 
+    f << "Index | Producto | Precio" << endl;
+
     for (int i = 0; i < arreglo.size(); i++) {
-        f << "Id: " << i << endl;
-        arreglo[i].printProductsFile(f);
+        f << i << "|";
+        arreglo[i].saveProductsToFile(f);
     }
 
 }
@@ -139,8 +141,10 @@ void imprimirTodos(vector<Productos> &arreglo) {
         return;
     }
 
+    printf("%5s | %-25s | %-9s\n", "Index", "Producto", "Precio");
+
     for (int i = 0; i < arreglo.size(); i++) {
-        cout << "Id: " << i << endl;
+        printf("%5d | ", i);
         arreglo[i].printProducts();
     }
 }
@@ -148,7 +152,7 @@ void imprimirTodos(vector<Productos> &arreglo) {
 void agregarDatos(vector<Productos> &arreglo) {
     Productos valor;
     string NameProduct;
-    int prices;
+    double prices;
     bool disponibilidad;
 
     cout << "Ingrese NameProduct: ";
@@ -171,11 +175,10 @@ void agregarDatos(vector<Productos> &arreglo) {
 
 
 void Productos::printProducts() const {
-    cout << "Product: " << productName << endl;
-    cout << "Price: " << price << endl;
+    printf("%-25s | %-7.2lf\n", productName.c_str(), price);
 }
 
-void Productos::printProductsFile(ofstream &f) const {
-    f << "Product: " << productName << endl;
-    f << "Price: " << price << endl;
+void Productos::saveProductsToFile(ofstream &f) const {
+    f << productName << "|";
+    f << price << endl;
 }
