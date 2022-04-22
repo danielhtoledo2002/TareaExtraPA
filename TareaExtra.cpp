@@ -13,17 +13,17 @@ using namespace std;
 
 struct Productos{
 public:
-    string ProductName;
+    string productName;
     int price{};
     bool stock{true};
 
     void printProducts() const;
-    void PrintProductsFile(ofstream & f) const;
+    void printProductsFile(ofstream & f) const;
 };
 
-void guardar_todo(vector<Productos> & arreglo);
-void imprimir_todos(vector<Productos> & arreglo);
-void agregardatos(vector<Productos> & arreglo);
+void guardarTodo(vector<Productos> & arreglo);
+void imprimirTodos(vector<Productos> & arreglo);
+void agregarDatos(vector<Productos> & arreglo);
 void menu();
 
 int main()
@@ -33,13 +33,13 @@ int main()
     int opcion =0, lazy;
     do
     {
-        guardar_todo(productos);
+        guardarTodo(productos);
         menu();
         cout<<"Ingrese la opcion: ";
         cin >> opcion;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        imprimir_todos(productos);
+        imprimirTodos(productos);
         switch (opcion)
         {
             case 1:
@@ -50,7 +50,7 @@ int main()
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 for (int i=0; i<lenn; i++)
-                    agregardatos(productos);
+                    agregarDatos(productos);
                 break;
 
             }
@@ -62,8 +62,8 @@ int main()
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 for (auto & producto : productos) {
-                    if (buscar == producto.ProductName) {
-                        cout << "El Productos ah sido encontrado exitosamente: " << producto.ProductName << endl;
+                    if (buscar == producto.productName) {
+                        cout << "El Productos ah sido encontrado exitosamente: " << producto.productName << endl;
                         producto.printProducts();
 
                     } else {
@@ -121,7 +121,7 @@ void menu()
     cout<<"6. Devolución"<<endl;
 }
 
-void guardar_todo(vector<Productos> & arreglo) {
+void guardarTodo(vector<Productos> & arreglo) {
     ofstream f;
     f.open("products.txt");
 
@@ -133,13 +133,13 @@ void guardar_todo(vector<Productos> & arreglo) {
     for (int i=0; i<arreglo.size(); i++)
     {
         f << "Id: " <<i << endl;
-        arreglo[i].PrintProductsFile(f);
+        arreglo[i].printProductsFile(f);
     }
 
 }
 
 
-void imprimir_todos(vector<Productos> & arreglo)
+void imprimirTodos(vector<Productos> & arreglo)
 {
     if (arreglo.empty())
     {
@@ -154,7 +154,7 @@ void imprimir_todos(vector<Productos> & arreglo)
     }
 }
 
-void agregardatos(vector<Productos> & arreglo)
+void agregarDatos(vector<Productos> & arreglo)
 {
     Productos valor;
     string NameProduct;
@@ -181,11 +181,11 @@ void agregardatos(vector<Productos> & arreglo)
 
 
 void Productos::printProducts() const {
-    cout << "Product: " << ProductName << endl;
+    cout << "Product: " << productName << endl;
     cout << "Price: " << price << endl;
 }
 
-void Productos::PrintProductsFile(ofstream & f) const {
-    f << "Product: " << ProductName << endl;
+void Productos::printProductsFile(ofstream & f) const {
+    f << "Product: " << productName << endl;
     f << "Price: " << price << endl;
 }
