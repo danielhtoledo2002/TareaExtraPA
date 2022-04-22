@@ -1,40 +1,35 @@
-#include <iostream>
-#include <limits>
-#include <iostream>
-#include <vector>
-#include <fstream>
 /*
  *Ejercicio Extra
  *Daniel Hernandez Toledo
  *Daniel Alejandro Osornio Lopez
 */
+
+#include <iostream>
+#include <limits>
+#include <vector>
+#include <fstream>
+
 using namespace std;
-struct productos{
+
+struct Productos{
+public:
     string ProductName;
     int price{};
     bool stock{true};
 
-public:
-    void printProducts() const {
-        cout << "Product: " << ProductName << endl;
-        cout << "Price: " << price << endl;
-    }
-
-    void PrintProductsFile(ofstream & f) const {
-        f << "Product: " << ProductName << endl;
-        f << "Price: " << price << endl;
-    }
+    void printProducts() const;
+    void PrintProductsFile(ofstream & f) const;
 };
-using namespace std;
-void guardar_todo(vector<productos> & arreglo);
-void imprimir_todos(vector<productos> & arreglo);
-void agregardatos(vector<productos> & arreglo);
+
+void guardar_todo(vector<Productos> & arreglo);
+void imprimir_todos(vector<Productos> & arreglo);
+void agregardatos(vector<Productos> & arreglo);
 void menu();
 
 int main()
 {
     fstream f;
-    vector<productos>productos;
+    vector<Productos>productos;
     int opcion =0, lazy;
     do
     {
@@ -42,14 +37,17 @@ int main()
         menu();
         cout<<"Ingrese la opcion: ";
         cin >> opcion;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         imprimir_todos(productos);
         switch (opcion)
         {
             case 1:
             {
                 int lenn;
-                cout << "Ingrese la cantidad de productos a agregar: ";
+                cout << "Ingrese la cantidad de Productos a agregar: ";
                 cin >> lenn;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 for (int i=0; i<lenn; i++)
                     agregardatos(productos);
@@ -59,13 +57,13 @@ int main()
             case 2:
             {
                 string buscar;
-                cout << "Ingrese un productos a buscar: ";
+                cout << "Ingrese un Productos a buscar: ";
                 cin >> buscar;
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 for (auto & producto : productos) {
                     if (buscar == producto.ProductName) {
-                        cout << "El productos ah sido encontrado exitosamente: " << producto.ProductName << endl;
+                        cout << "El Productos ah sido encontrado exitosamente: " << producto.ProductName << endl;
                         producto.printProducts();
 
                     } else {
@@ -82,7 +80,7 @@ int main()
 
                 do{
 
-                cout << "Ingresa la posicion del productos a devolver: ";
+                cout << "Ingresa la posicion del Productos a devolver: ";
                 cin >> lazy;
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -93,7 +91,7 @@ int main()
         case 4:
         {
             do {
-                cout << "Ingresa la posicion del productos a devolver: ";
+                cout << "Ingresa la posicion del Productos a devolver: ";
                     cin >> lazy;
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -123,7 +121,7 @@ void menu()
     cout<<"6. Devolución"<<endl;
 }
 
-void guardar_todo(vector<productos> & arreglo) {
+void guardar_todo(vector<Productos> & arreglo) {
     ofstream f;
     f.open("products.txt");
 
@@ -141,7 +139,7 @@ void guardar_todo(vector<productos> & arreglo) {
 }
 
 
-void imprimir_todos(vector<productos> & arreglo)
+void imprimir_todos(vector<Productos> & arreglo)
 {
     if (arreglo.empty())
     {
@@ -156,18 +154,20 @@ void imprimir_todos(vector<productos> & arreglo)
     }
 }
 
-void agregardatos(vector<productos> & arreglo)
+void agregardatos(vector<Productos> & arreglo)
 {
-    productos valor;
+    Productos valor;
     string NameProduct;
     int prices;
     bool disponibilidad;
-    cin.sync();
+
     cout << "Ingrese NameProduct: ";
     getline(cin, NameProduct);
-    cin.sync();
+
     cout << "Ingrese price: ";
     cin>>prices;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     disponibilidad = true;
 
     valor ={
@@ -177,4 +177,15 @@ void agregardatos(vector<productos> & arreglo)
     };
 
     arreglo.push_back(valor);
+}
+
+
+void Productos::printProducts() const {
+    cout << "Product: " << ProductName << endl;
+    cout << "Price: " << price << endl;
+}
+
+void Productos::PrintProductsFile(ofstream & f) const {
+    f << "Product: " << ProductName << endl;
+    f << "Price: " << price << endl;
 }
