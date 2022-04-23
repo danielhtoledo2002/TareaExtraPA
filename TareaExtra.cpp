@@ -47,6 +47,8 @@ void eliminarProductos(Productos &productos, Productos &productosEnTienda, const
 
 void agregarProductoACarro(Productos &productosEnCarro, Productos &productos, string & producto, int cantidad);
 
+void eliminarArchivo(Productos &productos, Productos &productosEnTienda, const string & archivo);
+
 void menu();
 
 int buscarProducto(Productos &productosEnTienda, const string &buscar);
@@ -146,7 +148,8 @@ int main()
                         {
                             total = total - persona.dinero;
                             cout<<"Compra exitosa!! "<<endl;
-                            eliminarProductos(persona.productosAComprar, productosEnTienda, string("Usuario.txt"));
+                            eliminarArchivo(persona.productosAComprar, productosEnTienda, string("Usuario.txt"));
+
                             if (total == 0)
                             {
                                 cout<<"No sobra dinero"<<endl;
@@ -197,7 +200,15 @@ int main()
 
     }while (option != 3);
 }
+void eliminarArchivo(Productos &productos, Productos &productosEnTienda, const string & archivo)
+{
+    for (const Producto& pro : productos)
+    {
+        int j = buscarProducto(productosEnTienda, pro.productName);
+        productosEnTienda[j].cantidad -= pro.cantidad;
+    }
 
+}
 int buscarProducto(Productos &productos, const string &buscar) {
     for (int i=0; i<productos.size(); i++) {
         if (buscar == productos[i].productName) {
