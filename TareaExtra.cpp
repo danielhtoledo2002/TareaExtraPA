@@ -60,15 +60,11 @@ int main()
     Persona persona = { 0, cargarProductos("Usuario.txt") };
     int option = 0, lazy;
 
-    do {
+    do
+    {
         guardarTodo(productosEnTienda, string("Products.txt"));
         guardarTodo(persona.productosAComprar, string("Usuario.txt"));
-
-        cout << "Menu Principal!!" << endl;
-        cout << "1. Menu usuarios Normales" << endl;
-        cout << "2. Menu Administrador" << endl;
-        cout << "3. Salir" << endl;
-        cout << "Ingrese la option: ";
+        menuAdmin();
         cin >> option;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -78,7 +74,6 @@ int main()
             {
                 guardarTodo(productosEnTienda, string("Products.txt"));
                 guardarTodo(persona.productosAComprar, string("Usuario.txt"));
-
                 menu();
                 cout << "Ingrese la option: ";
                 cin >> option;
@@ -392,4 +387,12 @@ Productos cargarProductos(const string & archivo) {
     }
 
     return productos;
+}
+void menuAdmin()
+{
+    cout << "Menu Principal!!" << endl;
+    cout << "1. Menu usuarios Normales" << endl;
+    cout << "2. Menu Administrador" << endl;
+    cout << "3. Salir" << endl;
+    cout << "Ingrese la option: ";
 }
