@@ -1,8 +1,8 @@
 Leche|10|10
-Sopa|3|10
+Sopa|3|4
 Shampoo|2|34
 Huevo|40|80
 Balon|25|150
 Shampoo|25.5|100
-Salchichas|24|100
-Pelota|45|25
+Salchichas|24|70
+Pelota|45|5

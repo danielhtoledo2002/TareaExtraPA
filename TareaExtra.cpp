@@ -131,19 +131,25 @@ int main()
                     }
                     case 4:
                     {
-                        double total = 0;
+                        double total =0 ;
+                        double cantidadPorducto = 0;
                         cout<<"Ingresar el dinero: ";
                         cin>>persona.dinero;
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         for (Producto producto : persona.productosAComprar)
                         {
-                            producto.price += total;
+                            total += producto.price;
+                            cantidadPorducto = producto.cantidad;
+
                         }
+
+                        total = total*cantidadPorducto;
                         if (persona.dinero >= total)
                         {
-                            total = total - persona.dinero;
+                            total = persona.dinero- total;
                             cout<<"Compra exitosa!! "<<endl;
                             eliminarArchivo(persona.productosAComprar, productosEnTienda, string("Usuario.txt"));
+                            guardarTodo(persona.productosAComprar, string("Usuario.txt"));
 
                             if (total == 0)
                             {
@@ -151,7 +157,7 @@ int main()
                             }
                             else
                             {
-                                cout<<"El cambio es: "<<total;
+                                cout<<"El cambio es: "<<total<<endl;
                             }
                         } else{cout<<"No se puede realizar la compra"<<endl;}
 
